@@ -1,7 +1,7 @@
 package ch.fairfood.backend.controller;
 
 import ch.fairfood.backend.model.Product;
-import ch.fairfood.backend.repository.ProductRepository;
+import ch.fairfood.backend.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,21 +11,14 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
 
-    private final ProductRepository repo;
+    private final ProductService productService;
 
-    public ProductController(ProductRepository repo) {
-        this.repo = repo;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
-    public List<Product> getAll() throws Exception {
-        var result =  repo.findAll();
-
-            if(result.isEmpty()) {
-                throw new Exception("Oh no result is empty");
-            }
-
-            return result;
-
+    public List<Product> getAll() {
+        return productService.getAll();
     }
 }

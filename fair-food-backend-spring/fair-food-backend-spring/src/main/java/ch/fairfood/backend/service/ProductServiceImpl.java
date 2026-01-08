@@ -10,48 +10,58 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductServiceImpl(ProductRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public List<Product> getAll() {
-        return productRepository.findAll();
+        try {
+            List<Product> products = repository.findAll();
+
+            if (products.isEmpty()) {
+                throw new ProductNotFoundException(-1L);
+            }
+
+            return products;
+
+        } catch (ProductNotFoundException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException("Fehler beim Laden der Produkte", e);
+        } finally {
+            System.out.println("getAll() ausgeführt");
+        }
     }
 
     @Override
     public Product getById(Long id) {
-        return productRepository.findById(id)
-                .orElseThrow(() -> new ProductNotFoundException(id));
+        try {
+            return repository.findById(id)
+                    .orElseThrow(() -> new ProductNotFoundException(id));
+        } finally {
+            System.out.println("getById() ausgeführt");
+        }
     }
 
     @Override
     public Product create(Product product) {
-        product.setDiscount(product.getDiscount());
-        return productRepository.save(product);
+        return repository.save(product);
     }
 
     @Override
     public Product update(Long id, Product update) {
         Product existing = getById(id);
         existing.setName(update.getName());
-        existing.setBrand(update.getBrand());
         existing.setPrice(update.getPrice());
-        existing.setDistance(update.getDistance());
-        existing.setOrigin(update.getOrigin());
-        existing.setBio(update.isBio());
-        existing.setExpiryDays(update.getExpiryDays());
-        existing.setDiscount(update.getDiscount());
-        return productRepository.save(existing);
+        return repository.save(existing);
     }
 
     @Override
     public void delete(Long id) {
-        if (!productRepository.existsById(id)) {
-            throw new ProductNotFoundException(id);
-        }
-        productRepository.deleteById(id);
+        Product product = getById(id);
+        repository.delete(product);
     }
 }
