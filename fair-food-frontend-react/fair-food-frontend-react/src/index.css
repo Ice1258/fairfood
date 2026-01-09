@@ -1,22 +1,19 @@
 :root {
-  --brand-green: #0aa85a;
-  --brand-green-dark: #2f6d53;
+  --brand-green: #0a9a6a;
+  --brand-green-dark: #1f6f5b;
   --text: #111;
-  --muted: #666;
+  --muted: #5f5f5f;
   --bg: #ffffff;
-  --chip-bg: #2d2d2d;
-  --chip-text: #ffffff;
-  --chip-active: #4caf50;
-  --card-bg: #f7f7f7;
-  --divider: #e3e3e3;
+  --chip-bg: transparent;
+  --chip-text: #1f6f5b;
+  --chip-active: #1f6f5b;
+  --card-bg: #f3f6f5;
+  --divider: #e1e6e4;
   --accent: #1e88ff;
-  --shadow: 0 6px 24px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.05);
-  --radius-lg: 24px;
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  --radius-lg: 22px;
   --radius-sm: 10px;
   --container: 1100px;
-  --slate-100: #eef2f7;
-  --slate-200: #dfe7f0;
-  --slate-300: #c9d6e6;
 }
 
 * {
@@ -33,65 +30,56 @@ body {
     "Helvetica Neue", Arial;
 }
 
-/* =====================
-   BANNER
-===================== */
 .banner {
   background: linear-gradient(
-    180deg,
-    var(--brand-green) 0%,
-    var(--brand-green-dark) 100%
+    160deg,
+    var(--brand-green),
+    var(--brand-green-dark)
   );
   color: #fff;
-  padding: 40px 16px 54px;
+  padding: 48px 16px 64px;
 }
 
 .banner .title {
   max-width: var(--container);
   margin: 0 auto;
-  font-size: clamp(32px, 6vw, 72px);
+  font-size: clamp(36px, 6vw, 72px);
   line-height: 1.05;
   font-weight: 800;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
   text-align: center;
 }
 
-/* =====================
-   SECTIONS
-===================== */
 .section {
   max-width: var(--container);
-  margin: 28px auto;
+  margin: 40px auto;
   padding: 0 16px;
 }
 
 .h2 {
-  font-size: clamp(20px, 3vw, 28px);
+  font-size: clamp(22px, 3vw, 30px);
   font-weight: 800;
-  margin: 6px 0 8px;
+  margin: 6px 0 10px;
 }
 
 .divider {
-  height: 10px;
-  background: var(--divider);
+  height: 6px;
+  background: linear-gradient(90deg, var(--divider), transparent);
   border-radius: 99px;
-  margin: 6px 0 22px;
+  margin: 6px 0 26px;
 }
 
-/* =====================
-   TOP DEALS
-===================== */
 .deals {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  max-width: 720px;
+  gap: 22px;
+  max-width: 760px;
 }
 
 .deals .pair {
   display: grid;
   grid-template-columns: 1fr auto;
-  column-gap: 18px;
+  column-gap: 20px;
   row-gap: 10px;
 }
 
@@ -99,89 +87,156 @@ body {
   font-weight: 700;
 }
 
-/* =====================
-   FILTERS
-===================== */
 .filters {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 180px));
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 18px;
+  margin-bottom: 18px;
 }
 
 .chip {
   background: var(--chip-bg);
   color: var(--chip-text);
-  border: 0;
+  border: 2px solid rgba(31, 111, 91, 0.25);
   border-radius: var(--radius-sm);
-  padding: 12px 22px;
+  padding: 14px 22px;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  box-shadow: var(--shadow);
+  letter-spacing: 0.04em;
   cursor: pointer;
   text-align: center;
-  transition: transform 0.12s ease, filter 0.12s ease, background 0.2s;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .chip:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
+  border-color: var(--brand-green);
 }
 
 .chip.active {
-  background: var(--chip-active);
+  background: rgba(31, 111, 91, 0.12);
+  border-color: var(--brand-green);
 }
 
-/* =====================
-   PRODUCT GRID
-===================== */
+.inline-controls {
+  margin: 10px 0 18px;
+}
+
+.inline-controls .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: #f6f8f7;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #e1e6e4;
+}
+
+.inline-controls .pill strong {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111;
+}
+
+.inline-controls .pill button {
+  appearance: none;
+  background: #ffffff;
+  border: 2px solid rgba(31, 111, 91, 0.25);
+  color: var(--brand-green-dark);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.inline-controls .pill button:hover {
+  border-color: var(--brand-green);
+}
+
+.inline-controls .pill button.active {
+  background: rgba(31, 111, 91, 0.12);
+  border-color: var(--brand-green);
+}
+
+.inline-controls #brandInputWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.inline-controls #brandInput {
+  appearance: none;
+  border: 2px solid rgba(31, 111, 91, 0.25);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.inline-controls #brandInput:focus {
+  border-color: var(--brand-green);
+}
+
+.inline-controls #brandClear {
+  appearance: none;
+  border: none;
+  background: rgba(31, 111, 91, 0.12);
+  color: var(--brand-green-dark);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.inline-controls #brandClear:hover {
+  background: rgba(31, 111, 91, 0.18);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 28px;
-  margin-top: 18px;
+  gap: 32px;
+  margin-top: 28px;
 }
 
-/* =====================
-   PRODUCT CARD
-===================== */
 .card {
-  background: #fff;
-  border: 1px solid #eee;
-  border-radius: 12px;
-  overflow: hidden;
+  background: #ffffff;
+  border-radius: 16px;
   box-shadow: var(--shadow);
-  position: relative;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
-  cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 .media {
-  background: var(--card-bg);
-  height: 150px;
+  background: #eef3f1;
+  height: 160px;
   display: grid;
   place-items: center;
-  color: #bdbdbd;
+  color: #b8c2be;
+  border-radius: 16px 16px 0 0;
 }
 
 .card-body {
-  padding: 12px 14px 16px;
+  padding: 16px 18px 20px;
   font-size: 14px;
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .card-body .title {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .card-body .price {
-  font-weight: 800;
+  font-weight: 900;
+  font-size: 16px;
 }
 
 .card-body .muted {
@@ -192,60 +247,89 @@ body {
 .badge {
   display: inline-block;
   font-size: 11px;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: rgba(31, 111, 91, 0.15);
+  color: #1f6f5b;
   font-weight: 700;
-  margin-left: 6px;
 }
 
-/* =====================
-   MODAL
-===================== */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+.product-search {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-
-.modal {
-  width: min(780px, 92vw);
-  background: #fff;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-}
-
-.modal header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  background: #f4f6f8;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.modal .content {
-  padding: 16px 20px 22px;
-  display: grid;
   gap: 10px;
+  margin: 18px 0 26px;
 }
 
-.close-btn {
+.product-search .bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e3e7e5;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.product-search input {
+  flex: 1;
   border: none;
-  background: transparent;
-  font-size: 24px;
-  cursor: pointer;
+  outline: none;
+  padding: 14px 18px;
+  font-size: 14px;
 }
 
-/* =====================
-   RESPONSIVE
-===================== */
+.product-search button {
+  border: none;
+  background: var(--brand-green-dark);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.details {
+  max-width: var(--container);
+  margin: 64px auto;
+  padding: 0 16px;
+}
+
+.price-range,
+.dist-range {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 16px 20px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.price-range .field,
+.dist-range .field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid #e3e7e5;
+}
+
+.price-range input,
+.dist-range input {
+  width: 90px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.price-range small,
+.dist-range small {
+  grid-column: 3;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 @media (max-width: 1100px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
@@ -269,89 +353,7 @@ body {
     grid-template-columns: 1fr;
   }
 }
-/* FORCE Product Search Style */
-.product-search {
-  display: flex !important;
-  gap: 8px !important;
-  margin: 12px 0 18px;
-}
 
-.product-search .bar {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 999px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-}
-
-.product-search input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 12px 16px;
-  font-size: 14px;
-}
-
-.product-search button {
-  border: none;
-  background: #2f6d53;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-weight: 700;
-}
-.details {
-  max-width: 1100px;
-  margin: 60px auto;
-  padding: 0 16px;
-}
-/* Preis- & Distanz-Range Layout wie Mockup */
-
-.price-range,
-.dist-range {
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  gap: 12px 16px;
-  align-items: center;
-  margin-top: 14px;
-}
-
-/* Input-Felder */
-.price-range .field,
-.dist-range .field {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  padding: 8px 12px;
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-}
-
-/* Zahlenfelder */
-.price-range input,
-.dist-range input {
-  width: 90px;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-/* Erklärungstext rechts */
-.price-range small,
-.dist-range small {
-  grid-column: 3;
-  color: #666;
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-/* Mobile Fallback */
 @media (max-width: 800px) {
   .price-range,
   .dist-range {
@@ -362,10 +364,4 @@ body {
   .dist-range small {
     grid-column: 1;
   }
-}
-.map-card > svg {
-  pointer-events: auto;  /* statt none */
-}
-.poi {
-  pointer-events: auto;
 }
